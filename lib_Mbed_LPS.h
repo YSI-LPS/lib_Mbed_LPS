@@ -46,10 +46,20 @@
 
 #include "mbed.h"
 
+/** Renvoie l'ID unique du Mbed
+ *
+ *  @param ID pointeur sur une chaine de caractere contenant l'ID unique du Mbed
+ */
 void getMbedID(char *ID);
 
+/** Renvoie true si l'ID unique du Mbed correspond à celui attendu
+ *
+ */
 bool checkIDs(void);
 
+/** Renvoie une chaine de caractere contenant le nom du dernier fichier cree sur le Mbed
+ *
+ */
 char * getLastMbedFileName(void);
 
 #endif
