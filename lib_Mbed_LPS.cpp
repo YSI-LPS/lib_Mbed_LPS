@@ -46,7 +46,10 @@
 
 #define MBED_ID "101000000000000000000002F7F17DC0acd36051775585b8c16ad6431f445cd5" // MBED_ID se trouvant dans MBED.HTM entre auth= et &loader=
 
-
+/** Renvoie l'ID unique du Mbed
+ *
+ *  @param ID pointeur sur une chaine de caractere contenant l'ID unique du Mbed
+ */
 void getMbedID(char *ID)
 {
     LocalFileSystem local("mbed");
@@ -64,6 +67,9 @@ void getMbedID(char *ID)
     }
 }
 
+/** Renvoie true si l'ID unique du Mbed correspond à celui attendu
+ *
+ */
 bool checkIDs(void)
 {
     char ID[100];
@@ -76,6 +82,9 @@ bool checkIDs(void)
     return false;
 }
 
+/** Renvoie une chaine de caractere contenant le nom du dernier fichier cree sur le Mbed
+ *
+ */
 char * getLastMbedFileName(void)
 {
     LocalFileSystem local("mbed");
