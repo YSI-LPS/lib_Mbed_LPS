@@ -9,17 +9,19 @@
 * 
 * 
 * Serial pc(USBTX,USBRX);
+* DigitalOut led(LED1);
 * 
 * void interruption_serie(void);
 * 
 * 
 * int main()
 * {
-*     if(checkIDs()) return 0;
+*     if(!checkIDs()) return 0;
 *     pc.attach(&interruption_serie);
 *     
 *     while(1)
 *     {
+*         led = !led;
 *         wait(0.25);
 *     }
 * }
@@ -45,6 +47,10 @@
 #define DEF_lib_Mbed_LPS_H
 
 #include "mbed.h"
+
+/** MBED_ID est un define correspondant a une chaine de caracteres contenant l'ID attendu du Mbed
+ */
+#define MBED_ID "101000000000000000000002F7F204A764cc6e6a004f5a3470ff1975de9d0ddd" // MBED_ID se trouvant dans MBED.HTM entre auth= et &loader=
 
 /** Renvoie l'ID unique du Mbed
  *
