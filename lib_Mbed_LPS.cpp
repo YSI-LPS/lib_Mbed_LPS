@@ -9,17 +9,19 @@
 * 
 * 
 * Serial pc(USBTX,USBRX);
+* DigitalOut led(LED1);
 * 
 * void interruption_serie(void);
 * 
 * 
 * int main()
 * {
-*     if(checkIDs()) return 0;
+*     if(!checkIDs()) return 0;
 *     pc.attach(&interruption_serie);
 *     
 *     while(1)
 *     {
+*         led = !led;
 *         wait(0.25);
 *     }
 * }
@@ -43,10 +45,7 @@
 
 #include "lib_Mbed_LPS.h"
 
-
-#define MBED_ID "101000000000000000000002F7F17DC0acd36051775585b8c16ad6431f445cd5" // MBED_ID se trouvant dans MBED.HTM entre auth= et &loader=
-
-/** Renvoie l'ID unique du Mbed
+/** Permet d'obtenir l'ID unique du Mbed
  *
  *  @param ID pointeur sur une chaine de caractere contenant l'ID unique du Mbed
  */
@@ -57,7 +56,7 @@ void getMbedID(char *ID)
     char * chp;
     
     fp = fopen("/mbed/MBED.htm", "r");
-    if(!fp)     printf("erreur ouverture du fichier MBED.htm\r\n");
+    if(!fp)     printf("Could not open directory!\r\n");
     else
     {
         fscanf(fp, "%*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s url=http://mbed.org/start?auth=%s", ID);
@@ -77,9 +76,9 @@ bool checkIDs(void)
     if(strncmp(ID, MBED_ID, strlen(MBED_ID)) != 0)
     {
         printf("unknown Mbed\r\n");
-        return true;
+        return false;
     }
-    return false;
+    return true;
 }
 
 /** Renvoie une chaine de caractere contenant le nom du dernier fichier cree sur le Mbed
@@ -99,7 +98,7 @@ char * getLastMbedFileName(void)
     }
     else 
     {
-        printf("Could not open directory!\n");
+        printf("Could not open directory!\r\n");
     }
     closedir(d);
     return file_name;
