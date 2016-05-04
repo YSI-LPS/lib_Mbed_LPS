@@ -52,7 +52,7 @@
  */
 #define MBED_ID "101000000000000000000002F7F204A764cc6e6a004f5a3470ff1975de9d0ddd" // MBED_ID se trouvant dans MBED.HTM entre auth= et &loader=
 
-/** Renvoie l'ID unique du Mbed
+/** Permet d'obtenir l'ID unique du Mbed
  *
  *  @param ID pointeur sur une chaine de caractere contenant l'ID unique du Mbed
  */
